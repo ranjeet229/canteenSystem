@@ -502,7 +502,7 @@ styleSheet.textContent = `
 `;
 document.head.appendChild(styleSheet);
 
-const API_BASE = 'http://localhost:3000/api';
+const API_BASE = 'https://canteensystem.onrender.com/api';
 
 const api = {
     getMenu: async () => {
