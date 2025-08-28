@@ -488,7 +488,6 @@ const styles = {
     }
 };
 
-// Add CSS animations
 const styleSheet = document.createElement('style');
 styleSheet.textContent = `
   @keyframes spin {
@@ -503,7 +502,6 @@ styleSheet.textContent = `
 `;
 document.head.appendChild(styleSheet);
 
-// Mock API service (replace with actual API calls)
 const API_BASE = 'http://localhost:3000/api';
 
 const api = {
@@ -524,7 +522,7 @@ const api = {
     },
 
     getOrder: async (orderId) => {
-        // Mock order retrieval
+      
         const response = await fetch(`${API_BASE}/orders/${orderId}`);
         if (!response.ok) throw new Error('Failed to get order');
         return await response.json();
@@ -537,14 +535,12 @@ const api = {
     },
 
     getOrderHistory: async (customerEmail) => {
-        // Mock order history
         const response = await fetch(`${API_BASE}/orders?customerEmail=${encodeURIComponent(customerEmail)}`);
         if (!response.ok) throw new Error('Failed to fetch order history');
         return await response.json();
     }
 };
 
-// Timer component for countdown
 const CountdownTimer = ({ expiresAt, onExpire }) => {
     const [timeLeft, setTimeLeft] = useState(0);
 
@@ -574,7 +570,7 @@ const CountdownTimer = ({ expiresAt, onExpire }) => {
         return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
     };
 
-    const isUrgent = timeLeft < 300; // Less than 5 minutes
+    const isUrgent = timeLeft < 300; 
 
     return (
         <div style={{
@@ -589,7 +585,6 @@ const CountdownTimer = ({ expiresAt, onExpire }) => {
     );
 };
 
-// Menu Item Component
 const MenuItem = ({ item, onAddToCart, cartItems }) => {
     const [isHovered, setIsHovered] = useState(false);
     const cartQuantity = cartItems[item._id] || 0;
@@ -697,7 +692,6 @@ const MenuItem = ({ item, onAddToCart, cartItems }) => {
     );
 };
 
-// Order Summary Component
 const OrderSummary = ({ order, onPay, onCancel }) => {
     const handleExpire = useCallback(() => {
         alert('Order has expired and will be automatically cancelled');
@@ -798,7 +792,6 @@ const OrderSummary = ({ order, onPay, onCancel }) => {
     );
 };
 
-// Order History Component
 const OrderHistory = ({ orders }) => {
     const getStatusStyle = (status) => {
         switch (status) {
@@ -855,7 +848,6 @@ const OrderHistory = ({ orders }) => {
     );
 };
 
-// Main App Component
 const CanteenOrderingSystem = () => {
     const [currentView, setCurrentView] = useState('menu'); // menu, checkout, order, history
     const [menuItems, setMenuItems] = useState([]);
@@ -865,7 +857,6 @@ const CanteenOrderingSystem = () => {
     const [orderHistory, setOrderHistory] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Load menu items on component mount
     useEffect(() => {
         const loadMenu = async () => {
             setLoading(true);
@@ -881,7 +872,6 @@ const CanteenOrderingSystem = () => {
         loadMenu();
     }, []);
 
-    // Cart management
     const handleAddToCart = (itemId, change) => {
         setCartItems(prev => {
             const newQuantity = (prev[itemId] || 0) + change;
@@ -904,7 +894,6 @@ const CanteenOrderingSystem = () => {
         return Object.values(cartItems).reduce((sum, quantity) => sum + quantity, 0);
     };
 
-    // Order management
     const handleCreateOrder = async () => {
         if (!customerInfo.name.trim() || !customerInfo.email.trim()) {
             let missingFields = [];
@@ -995,7 +984,7 @@ const CanteenOrderingSystem = () => {
         }
     };
 
-    // Group menu items by category
+
     const groupedItems = menuItems.reduce((groups, item) => {
         const category = item.category || 'Other';
         if (!groups[category]) groups[category] = [];
