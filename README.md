@@ -4,21 +4,6 @@
 
 A modern web application for managing canteen orders built with **React (Vite)**, **Node.js**, **Express**, and **MongoDB**. This system allows users to browse menu items, place orders, and for admins to manage menu and orders efficiently.
 
----
-
-## Table of Contents
-
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-  - [Backend Setup](#backend-setup)
-  - [Frontend Setup](#frontend-setup)
-- [Environment Variables](#environment-variables)
-- [API Endpoints](#api-endpoints)
-- [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
