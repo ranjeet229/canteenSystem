@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import { ShoppingCart, Clock, CheckCircle, XCircle, Plus, Minus, User, History } from 'lucide-react';
 
-// CSS styles
 const styles = {
     app: {
         minHeight: '100vh',
