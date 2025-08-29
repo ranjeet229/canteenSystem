@@ -66,12 +66,12 @@ orderSchema.index({ status: 1, expiresAt: 1 });
 const MenuItem = mongoose.model('MenuItem', menuItemSchema);
 const Order = mongoose.model('Order', orderSchema);
 
-// fucntion to perfform utility 
+// fucntion to perfform utility
 const generateOrderId = () => {
   return 'ORD' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
 };
 
-// manage the stock with transaction safety
+// Stock Management with Transaction Safety
 const updateStockWithTransaction = async (updates, session = null) => {
   const operations = updates.map(({ itemId, quantity }) => ({
     updateOne: {
