@@ -28,7 +28,7 @@ const MenuItem = ({ item, onAddToCart, cartItems }) => {
                 <div style={{ flex: 1 }}>
                     {item.imageUrl && (
                         <img
-                            src={item.imageUrl}
+                            src={item.image}
                             alt={item.name}
                             style={{ width: '100%', borderRadius: '0.5rem', marginBottom: '0.5rem', objectFit: 'cover', height: '150px' }}
                         />

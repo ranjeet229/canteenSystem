@@ -87,10 +87,9 @@ const updateStockWithTransaction = async (updates, session = null) => {
 // Auto-cancellation Service
 const cancelExpiredOrders = async () => {
   const session = await mongoose.startSession();
-  
   try {
     await session.withTransaction(async () => {
-      // Find expired orders that are still pending
+      // Find expired orders that are still pending or try to continue
       const expiredOrders = await Order.find({
         status: 'pending',
         expiresAt: { $lt: new Date() }
@@ -375,7 +374,6 @@ app.put('/api/admin/orders/:orderId/status', async (req, res) => {
   try {
     const { status } = req.body;
     const update = { status };
-    
     if (status === 'completed') {
       update.completedAt = new Date();
     }
@@ -404,7 +402,7 @@ app.get('/api/health', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Canteen server running on port ${PORT}`);
-  console.log('Auto-cancellation service started - checking every minute');
+  console.log('mongodb connected');
 });
 
 module.exports = app;

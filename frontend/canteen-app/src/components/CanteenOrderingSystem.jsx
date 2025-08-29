@@ -16,6 +16,42 @@ const CanteenOrderingSystem = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        const isFirstVisit = localStorage.getItem("isFirstVisit");
+
+        if (!isFirstVisit) {
+            // for the first visit it clear everything 
+            localStorage.removeItem("customerInfo");
+            localStorage.removeItem("cartItems");
+            localStorage.setItem("isFirstVisit", "true");
+        } else {
+            // restore the data that i have saved before
+            const savedCustomer = localStorage.getItem("customerInfo");
+            const savedCart = localStorage.getItem("cartItems");
+
+            if (savedCustomer) {
+                setCustomerInfo(JSON.parse(savedCustomer));
+            }
+            if (savedCart) {
+                setCartItems(JSON.parse(savedCart));
+            }
+        }
+    }, []);
+
+    // this function runs after restore your data
+    useEffect(() => {
+        if (customerInfo.name || customerInfo.email) {
+            localStorage.setItem("customerInfo", JSON.stringify(customerInfo));
+        }
+    }, [customerInfo]);
+
+    useEffect(() => {
+        if (Object.keys(cartItems).length > 0) {
+            localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        }
+    }, [cartItems]);
+    //......................................................>>> for save data
+
+    useEffect(() => {
         const loadMenu = async () => {
             setLoading(true);
             try {
@@ -29,7 +65,6 @@ const CanteenOrderingSystem = () => {
         };
         loadMenu();
     }, []);
-
     const handleAddToCart = (itemId, change) => {
         setCartItems(prev => {
             const newQuantity = (prev[itemId] || 0) + change;

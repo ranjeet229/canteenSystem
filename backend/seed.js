@@ -41,7 +41,7 @@ async function seedDatabase() {
     });
 
     console.log('\nDatabase seeding completed successfully!');
-    console.log('You can now start the server and begin testing the application.');
+    console.log('starting server');
 
   } catch (error) {
     console.error('Error seeding database:', error);
