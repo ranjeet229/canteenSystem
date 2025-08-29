@@ -19,11 +19,10 @@ A modern web application for managing canteen orders built with **React (Vite)**
 
 ## Tech Stack
 
-- **Frontend:** React + Vite, TailwindCSS (optional)
+- **Frontend:** React + Vite,Css
 - **Backend:** Node.js, Express.js
-- **Database:** MongoDB (Atlas or local)
-- **Authentication:** JWT (JSON Web Tokens)
-- **State Management:** React Context / Redux (optional)
+- **Database:** MongoDB (Atlas)
+- **State Management:** React Context 
 - **Tools:** Postman, VSCode, Git
 
 ---
