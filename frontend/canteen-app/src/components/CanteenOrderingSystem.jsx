@@ -87,12 +87,23 @@ const CanteenOrderingSystem = () => {
         return Object.values(cartItems).reduce((sum, quantity) => sum + quantity, 0);
     };
 
+    // this insure that your email is in correct format ...>>
+    const isValidGmail = (email) => {
+        const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+        return gmailRegex.test(email.trim());
+    };
+
     const handleCreateOrder = async () => {
         if (!customerInfo.name.trim() || !customerInfo.email.trim()) {
             let missingFields = [];
             if (!customerInfo.name.trim()) missingFields.push('name');
             if (!customerInfo.email.trim()) missingFields.push('email');
             alert(`Please enter your ${missingFields.join(' and ')}`);
+            return;
+        }
+
+        if (!isValidGmail(customerInfo.email)) {
+            alert("Please enter a valid Gmail address");
             return;
         }
 
@@ -125,6 +136,7 @@ const CanteenOrderingSystem = () => {
             setLoading(false);
         }
     };
+
 
     const handlePayOrder = async (orderId) => {
         setLoading(true);
@@ -160,6 +172,11 @@ const CanteenOrderingSystem = () => {
     const loadOrderHistory = async () => {
         if (!customerInfo.email) {
             alert('Please enter your email to view order history');
+            return;
+        }
+
+        if(!isValidGmail(customerInfo.email)){
+            alert("Please enter a valid Gmail address");
             return;
         }
 
@@ -263,9 +280,8 @@ const CanteenOrderingSystem = () => {
                 </div>
             </header>
 
-            {/* Main Content */}
             <main style={styles.main}>
-                {/* Customer Info Form */}
+                {/* customer Infom form */}
                 {(currentView === 'menu' || currentView === 'checkout') && (
                     <div style={styles.card}>
                         <div style={styles.customerForm}>
@@ -273,7 +289,7 @@ const CanteenOrderingSystem = () => {
                             <div style={styles.customerInputs}>
                                 <input
                                     type="text"
-                                    placeholder="Your Name *"
+                                    placeholder="Your Name"
                                     value={customerInfo.name}
                                     onChange={(e) => setCustomerInfo(prev => ({ ...prev, name: e.target.value }))}
                                     style={styles.input}
@@ -288,6 +304,8 @@ const CanteenOrderingSystem = () => {
                                     style={styles.input}
                                     onFocus={(e) => Object.assign(e.target.style, { ...styles.input, ...styles.inputFocus })}
                                     onBlur={(e) => Object.assign(e.target.style, styles.input)}
+                                    pattern="[a-zA-Z0-9._%+-]+@gmail\.com"
+                                    title="Please enter a valid Gmail address"
                                 />
                             </div>
                         </div>
