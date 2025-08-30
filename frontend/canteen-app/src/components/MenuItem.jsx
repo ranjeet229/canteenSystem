@@ -8,6 +8,14 @@ const MenuItem = ({ item, onAddToCart, cartItems }) => {
     const isOutOfStock = item.stock === 0;
     const maxQuantity = item.stock;
 
+    // 🔹 Always format in Indian Rupees (₹)
+    const formatPrice = (amount) => {
+        return new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+        }).format(amount);
+    };
+
     const getStockStyle = (stock) => {
         if (stock > 5) return styles.stockHigh;
         if (stock > 0) return styles.stockMedium;
@@ -26,16 +34,24 @@ const MenuItem = ({ item, onAddToCart, cartItems }) => {
         >
             <div style={styles.menuItemHeader}>
                 <div style={{ flex: 1 }}>
-                    {item.imageUrl && (
+                    {item.image && (
                         <img
                             src={item.image}
                             alt={item.name}
-                            style={{ width: '100%', borderRadius: '0.5rem', marginBottom: '0.5rem', objectFit: 'cover', height: '150px' }}
+                            style={{
+                                width: '250px',
+                                borderRadius: '0.5rem',
+                                marginBottom: '0.5rem',
+                                objectFit: 'cover',
+                                height: '170px'
+                            }}
                         />
                     )}
                     <h3 style={styles.menuItemTitle}>{item.name}</h3>
                     <p style={styles.menuItemDescription}>{item.description}</p>
-                    <p style={styles.menuItemPrice}>${item.price}</p>
+                    <p style={styles.menuItemPrice}>
+                        {formatPrice(item.price)}
+                    </p>
                 </div>
                 <div>
                     <span style={{ ...styles.stockBadge, ...getStockStyle(item.stock) }}>
@@ -68,7 +84,9 @@ const MenuItem = ({ item, onAddToCart, cartItems }) => {
                         >
                             <Minus style={{ width: '16px', height: '16px' }} />
                         </button>
-                        <span style={{ width: '32px', textAlign: 'center', fontWeight: '600' }}>{cartQuantity}</span>
+                        <span style={{ width: '32px', textAlign: 'center', fontWeight: '600' }}>
+                            {cartQuantity}
+                        </span>
                         <button
                             onClick={() => onAddToCart(item._id, 1)}
                             disabled={cartQuantity >= maxQuantity}
@@ -94,7 +112,7 @@ const MenuItem = ({ item, onAddToCart, cartItems }) => {
 
                     {cartQuantity > 0 && (
                         <span style={styles.subtotalText}>
-                            Subtotal: ${(item.price * cartQuantity).toFixed(2)}
+                            Subtotal: {formatPrice(item.price * cartQuantity)}
                         </span>
                     )}
                 </div>

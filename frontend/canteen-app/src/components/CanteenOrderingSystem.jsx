@@ -26,14 +26,11 @@ const CanteenOrderingSystem = () => {
         } else {
             // restore the data that i have saved before
             const savedCustomer = localStorage.getItem("customerInfo");
-            const savedCart = localStorage.getItem("cartItems");
 
             if (savedCustomer) {
                 setCustomerInfo(JSON.parse(savedCustomer));
             }
-            if (savedCart) {
-                setCartItems(JSON.parse(savedCart));
-            }
+            
         }
     }, []);
 
@@ -44,11 +41,7 @@ const CanteenOrderingSystem = () => {
         }
     }, [customerInfo]);
 
-    useEffect(() => {
-        if (Object.keys(cartItems).length > 0) {
-            localStorage.setItem("cartItems", JSON.stringify(cartItems));
-        }
-    }, [cartItems]);
+    
     //......................................................>>> for save data
 
     useEffect(() => {
@@ -405,7 +398,7 @@ const CanteenOrderingSystem = () => {
                                                         </button>
                                                     </div>
                                                     <span style={{ ...styles.orderItemPrice, minWidth: '80px', textAlign: 'right' }}>
-                                                        ${(item.price * quantity).toFixed(2)}
+                                                        ₹{(item.price * quantity).toFixed(2)}
                                                     </span>
                                                 </div>
                                             </div>
@@ -416,7 +409,7 @@ const CanteenOrderingSystem = () => {
                                 <div style={styles.orderTotal}>
                                     <div style={styles.orderTotalRow}>
                                         <span>Total:</span>
-                                        <span style={styles.orderTotalAmount}>${getCartTotal().toFixed(2)}</span>
+                                        <span style={styles.orderTotalAmount}>₹{getCartTotal().toFixed(2)}</span>
                                     </div>
                                 </div>
 

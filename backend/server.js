@@ -60,13 +60,13 @@ const orderSchema = new mongoose.Schema({
   cancelReason: String
 });
 
-// Add index for auto cancellation payments 
+// Add index for auto cancellation payments
 orderSchema.index({ status: 1, expiresAt: 1 });
 
 const MenuItem = mongoose.model('MenuItem', menuItemSchema);
 const Order = mongoose.model('Order', orderSchema);
 
-// fucntion to perfform utility
+// Utility Functions
 const generateOrderId = () => {
   return 'ORD' + Date.now() + Math.random().toString(36).substr(2, 5).toUpperCase();
 };

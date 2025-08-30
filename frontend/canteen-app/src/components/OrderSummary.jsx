@@ -51,7 +51,7 @@ const OrderSummary = ({ order, onPay, onCancel }) => {
                                 <span style={styles.orderItemName}>{item.name}</span>
                                 <span style={styles.orderItemQuantity}>x{item.quantity}</span>
                             </div>
-                            <span style={styles.orderItemPrice}>${(item.price * item.quantity).toFixed(2)}</span>
+                            <span style={styles.orderItemPrice}>₹{(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                     ))}
                 </div>
@@ -60,7 +60,7 @@ const OrderSummary = ({ order, onPay, onCancel }) => {
             <div style={styles.orderTotal}>
                 <div style={styles.orderTotalRow}>
                     <span>Total Amount:</span>
-                    <span style={styles.orderTotalAmount}>${order.totalAmount.toFixed(2)}</span>
+                    <span style={styles.orderTotalAmount}>₹{order.totalAmount.toFixed(2)}</span>
                 </div>
             </div>
 

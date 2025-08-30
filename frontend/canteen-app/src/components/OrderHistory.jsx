@@ -42,7 +42,7 @@ const OrderHistory = ({ orders }) => {
                                         {order.status}
                                     </span>
                                     <p style={{ ...styles.menuItemPrice, marginTop: '0.25rem' }}>
-                                        ${order.totalAmount.toFixed(2)}
+                                        ₹{order.totalAmount.toFixed(2)}
                                     </p>
                                 </div>
                             </div>
