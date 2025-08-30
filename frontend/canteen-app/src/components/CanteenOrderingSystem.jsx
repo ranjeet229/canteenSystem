@@ -362,7 +362,7 @@ const CanteenOrderingSystem = () => {
                                                 <div>
                                                     <span style={styles.orderItemName}>{item.name}</span>
                                                     <span style={styles.orderItemQuantity}>x{quantity}</span>
-                                                    <span style={{ fontSize: '0.875rem', color: '#9ca3af', marginLeft: '0.5rem' }}>(${item.price} each)</span>
+                                                    <span style={{ fontSize: '0.875rem', color: '#9ca3af', marginLeft: '0.5rem' }}>(₹{item.price} each)</span>
                                                 </div>
                                                 <div style={styles.checkoutItemControls}>
                                                     <div style={styles.checkoutQuantityControls}>
